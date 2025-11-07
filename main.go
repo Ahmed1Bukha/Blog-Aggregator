@@ -44,6 +44,7 @@ func main(){
 	}
 	c.register("login",handlerLogin)
 	c.register("register",handlerRegister)
+	c.register("reset",handlerReset)
 	args:= os.Args
 	if len(args)==1{
 		log.Fatal("no command has been entered")
