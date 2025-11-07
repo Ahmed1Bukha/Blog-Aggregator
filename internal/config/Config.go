@@ -60,6 +60,10 @@ func write (cfg *Config)(error){
 	if err !=nil {
 		return fmt.Errorf("error with writing file")
 	}
+	err = os.WriteFile("/Users/bukha/.gatorconfig.json",jsonData,0644)
+	if err !=nil {
+		return fmt.Errorf("error with writing file")
+	}
 
 	return nil
 }
