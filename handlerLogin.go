@@ -1,12 +1,21 @@
 package main
 
-import "fmt"
+import (
+	"context"
+	"fmt"
+	"os"
+)
 
 func handlerLogin(s *state, cmd command) error{
 	if len(cmd.Args) == 0{
 		return fmt.Errorf("args is empty")
 	}
-	err := s.Cfg.SetUser(cmd.Args[0])
+	_,err := s.db.GetUser(context.Background(),cmd.Args[0])
+	if err != nil{
+		os.Exit(1)
+		return err
+	}
+	err = s.Cfg.SetUser(cmd.Args[0])
 	if err !=nil{
 		return err
 	}

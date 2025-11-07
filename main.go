@@ -1,14 +1,18 @@
 package main
 
 import (
+	"database/sql"
 	"log"
 	"os"
 
 	"github.com/ahmed1bukha/Blog-Aggregator/internal/config"
+	"github.com/ahmed1bukha/Blog-Aggregator/internal/database"
+	_ "github.com/lib/pq"
 )
 
 type state struct{
 	Cfg *config.Config
+	db  *database.Queries
 }
 type command struct{
 	Name string
@@ -16,19 +20,30 @@ type command struct{
 }
 
 func main(){
+	
 	cfg , err:= config.Read()
 	if err !=nil {
 		log.Fatalln(err)
 		os.Exit(0)
 	}
+
+	db, err := sql.Open("postgres", cfg.DBURL)
+	if err !=nil{
+		log.Fatalln(err.Error())
+	}
+	dbQueries := database.New(db)
+	
 	st := state{
 		Cfg: cfg,
+		db: dbQueries,
 	}
+
 	
 	c:= commands{
 		commands:make(map[string]func(*state, command) error),
 	}
 	c.register("login",handlerLogin)
+	c.register("register",handlerRegister)
 	args:= os.Args
 	if len(args)==1{
 		log.Fatal("no command has been entered")
