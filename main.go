@@ -47,6 +47,7 @@ func main(){
 	c.register("reset",handlerReset)
 	c.register("users",handlerUsers)
 	c.register("agg",handlerAgg)
+	c.register("addfeed",handlerAddFeed)
 	args:= os.Args
 	if len(args)==1{
 		log.Fatal("no command has been entered")
