@@ -20,3 +20,6 @@ WHERE feeds.url = $1;
 -- name: GetFeedByID :one
 SELECT * FROM feeds
 WHERE feeds.id = $1;
+
+-- name: DeleteTableFeeds :exec
+DELETE FROM feeds;

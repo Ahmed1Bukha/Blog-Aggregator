@@ -7,7 +7,15 @@ import (
 
 
 func handlerReset(s *state, cmd command) error{
-	err:= s.db.DeleteUserTable(context.Background())
+	err:= s.db.DeleteTableUser(context.Background())
+	if err !=nil{
+		return err
+	}
+	err= s.db.DeleteTableFeedsFollow(context.Background())
+	if err !=nil{
+		return err
+	}
+	err= s.db.DeleteTableFeeds(context.Background())
 	if err !=nil{
 		return err
 	}

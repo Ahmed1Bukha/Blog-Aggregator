@@ -21,3 +21,12 @@ INNER JOIN users on users.id = inserted_feed_follow.user_id;
 -- name: GetFeedFollowsForUser :many
 SELECT * FROM feed_follows
 WHERE feed_follows.user_id = $1;
+
+-- name: UnFollow :exec
+DELETE FROM feed_follows
+WHERE feed_follows.user_id = $1
+AND feed_follows.feed_id = $2;
+
+
+-- name: DeleteTableFeedsFollow :exec
+DELETE FROM feed_follows;
