@@ -9,14 +9,11 @@ import (
 	"github.com/google/uuid"
 )
 
-func handlerAddFeed(s *state, cmd command) error{
+func handlerAddFeed(s *state, cmd command, user database.User) error{
 	if len(cmd.Args) < 2{
 		return fmt.Errorf("requires atleast 2 inputs")
 	}
-	current_user,err := s.db.GetUser(context.Background(),s.Cfg.CurrentUserName)
-	if err !=nil{
-		return err
-	}
+	current_user := user
 	feedParams:= database.CreateFeedParams{
 		ID: uuid.New(),
 		CreatedAt: time.Now(),

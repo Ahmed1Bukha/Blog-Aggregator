@@ -9,7 +9,7 @@ import (
 	"github.com/google/uuid"
 )
 
-func handlerFollow(s *state, cmd command) error {
+func handlerFollow(s *state, cmd command,user database.User) error {
 	if len(cmd.Args) < 1 {
 		return fmt.Errorf("args should at least contain 1 url")
 	}
