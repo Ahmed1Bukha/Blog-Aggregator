@@ -23,3 +23,12 @@ WHERE feeds.id = $1;
 
 -- name: DeleteTableFeeds :exec
 DELETE FROM feeds;
+
+-- name: MarkFeedFetched :exec
+UPDATE feeds
+SET updated_at = $1, last_fetched = $2
+WHERE feeds.id = $3;
+
+-- name: GetNextFeedToFetch :one
+SELECT * FROM feeds
+ORDER BY last_fetched ASC NULLS FIRST;

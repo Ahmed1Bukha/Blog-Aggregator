@@ -13,10 +13,7 @@ func handlerFollow(s *state, cmd command,user database.User) error {
 	if len(cmd.Args) < 1 {
 		return fmt.Errorf("args should at least contain 1 url")
 	}
-	user,err := s.db.GetUser(context.Background(),s.Cfg.CurrentUserName)
-	if err !=nil{
-		return err
-	}
+	
 	feed,err := s.db.GetFeedByUrl(context.Background(),cmd.Args[0])
 	if err !=nil{
 		return err

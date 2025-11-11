@@ -52,6 +52,7 @@ func main(){
 	c.register("follow",middlewareLoggedIn(handlerFollow))
 	c.register("following",middlewareLoggedIn(handlerFollowing))
 	c.register("unfollow",middlewareLoggedIn(handlerUnfollow))
+	c.register("browse",middlewareLoggedIn(handlerBrowse))
 	args:= os.Args
 	if len(args)==1{
 		log.Fatal("no command has been entered")
