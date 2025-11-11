@@ -29,6 +29,20 @@ func handlerAddFeed(s *state, cmd command) error{
 	if err !=nil{
 		return err
 	}
+
+	feedFollowParams:= database.CreateFeedFollowParams{
+		ID: uuid.New(),
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		UserID: current_user.ID,
+		FeedID: feed.ID,
+	}
+
+	_,err= s.db.CreateFeedFollow(context.Background(),feedFollowParams)
+	if err !=nil{
+		return err
+	}
+
 	fmt.Println(feed)
 	return nil
 }

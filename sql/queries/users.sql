@@ -18,7 +18,7 @@ SELECT *
 FROM users
 WHERE id = $1;
 
--- name: DeleteTable :exec
+-- name: DeleteUserTable :exec
 DELETE FROM users;
 
 -- name: GetUsers :many
